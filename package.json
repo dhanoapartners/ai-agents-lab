@@ -1,0 +1,21 @@
+{
+  "name": "ai-agents-lab",
+  "private": true,
+  "description": "Training lab: build and test an MCP server for Practice Lab (dhanoapartners.com), and use Claude skills for testers.",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/server.ts",
+    "inspect": "npx @modelcontextprotocol/inspector tsx src/server.ts",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "20.16.11",
+    "tsx": "4.19.2",
+    "typescript": "5.6.3"
+  }
+}
