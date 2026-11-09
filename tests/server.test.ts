@@ -11,7 +11,7 @@
  *
  * Run: npm test   (LAB_URL=http://localhost:8788 npm test for a local copy of the site)
  */
-import { test, before, after } from 'node:test';
+import { test, before, after, beforeEach, type TestContext } from 'node:test';
 import assert from 'node:assert/strict';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
@@ -27,15 +27,24 @@ before(async () => {
 });
 after(async () => { await client.close(); });
 
+// Every MCP call is logged on the running test, so the HTML report (reporters/mcp-html.mjs) can show what
+// the "model" asked for and what the server answered.
+let current: TestContext | undefined;
+beforeEach((t) => { current = t as TestContext; });
+const log = (entry: Record<string, unknown>) => current?.diagnostic(`MCP ${JSON.stringify({ test: current.name, ...entry })}`);
+
 /** Calls a tool and parses its JSON text result. */
 async function call(name: string, args: Record<string, unknown> = {}) {
+  const started = Date.now();
   const r = await client.callTool({ name, arguments: args });
   const text = (r.content as { type: string; text: string }[])[0].text;
+  log({ tool: name, args, isError: r.isError === true, ms: Date.now() - started, response: text.slice(0, 4000) });
   return { isError: r.isError === true, text, json: r.isError ? undefined : JSON.parse(text) };
 }
 
 test('advertises seven tools, and only add_to_cart can change state', async () => {
   const { tools } = await client.listTools();
+  log({ tool: 'tools/list', args: {}, isError: false, ms: 0, response: JSON.stringify(tools.map((t) => ({ name: t.name, readOnly: t.annotations?.readOnlyHint === true, description: t.description })), null, 2) });
   assert.deepEqual(tools.map((t) => t.name).sort(),
     ['add_to_cart', 'ask_help_center', 'get_cart', 'get_product', 'get_reviews', 'lab_health', 'search_products']);
   const writers = tools.filter((t) => t.annotations?.readOnlyHint !== true).map((t) => t.name);

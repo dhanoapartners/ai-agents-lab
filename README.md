@@ -19,6 +19,16 @@ Hands-on training for the agentic side of QA, built on **[Practice Lab](https://
 
 All data is synthetic. Companion repo: [practice-lab](https://github.com/dhanoapartners/practice-lab) (the Playwright suite).
 
+## The test report
+
+`npm run test:report` runs the tests and writes **`reports/mcp-report.html`**, one self-contained page you can open in any browser:
+
+- totals (tests, passed, failed, time, MCP calls) and a pass bar;
+- **Tools exercised**: every tool, how often it was called, how many calls returned `isError`, and how many tests used it;
+- every test, with **each MCP call it made**: the arguments and the server's response, side by side. Failed tests open automatically with the assertion error.
+
+How it works: the tests log each call with `t.diagnostic()` (see `call()` in `tests/server.test.ts`), and a custom reporter for Node's test runner (`reporters/mcp-html.mjs`) turns them into the page. No extra test framework is needed. In CI the page is uploaded as the **mcp-report** artifact on every run.
+
 ## What is MCP?
 
 The **Model Context Protocol** is a standard way to give an AI model tools. A server lists its tools (name, description, input schema); a client such as Claude Desktop or Claude Code shows them to the model; the model decides when to call them. Write the server once and any MCP client can use it.
