@@ -2,6 +2,15 @@
 
 [![CI](https://github.com/dhanoapartners/ai-agents-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/dhanoapartners/ai-agents-lab/actions/workflows/ci.yml)
 
+## What this demonstrates
+
+*By Avneet Dhanoa (QualityFirstQA LLC). Part of a five-repo portfolio; start at [practice-lab](https://github.com/dhanoapartners/practice-lab).*
+
+- **Building for AI agents:** an MCP server that gives Claude safe, well-described tools over a real web app.
+- **Testing AI integrations like any other API:** every tool exercised through a real MCP client, including inputs, errors and state changes.
+- **Guarding against prompt injection:** untrusted text (customer reviews) is labelled as such before a model sees it.
+- **Reusable AI workflows for testers:** five Claude skills for writing tests, judging RAG answers, reviewing agent traces and locators.
+
 Hands-on training for the agentic side of QA, built on **[Practice Lab](https://www.dhanoapartners.com)**:
 
 1. **Build an MCP server.** `src/server.ts` gives Claude (or any MCP client) tools to browse the Practice Lab shop, ask its Help Center and manage a cart.
