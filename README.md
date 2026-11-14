@@ -19,6 +19,8 @@ Hands-on training for the agentic side of QA, built on **[Practice Lab](https://
 
 All data is synthetic. Companion repo: [practice-lab](https://github.com/dhanoapartners/practice-lab) (the Playwright suite).
 
+> **Teaching this as a lab?** [`HANDOUT.md`](HANDOUT.md) is a guided, hands-on student worksheet — setup, running the tests, reading the report, connecting Claude, and the exercises — with checkpoints to tick along the way. It explains MCP with a restaurant analogy (menu, waiter, kitchen, order, dish).
+
 ## The test report
 
 `npm run test:report` runs the tests and writes **`reports/mcp-report.html`**, one self-contained page you can open in any browser:
