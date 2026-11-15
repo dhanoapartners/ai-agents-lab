@@ -21,6 +21,8 @@ All data is synthetic. Companion repo: [practice-lab](https://github.com/dhanoap
 
 > **Teaching this as a lab?** [`HANDOUT.md`](HANDOUT.md) is a guided, hands-on student worksheet — setup, running the tests, reading the report, connecting Claude, and the exercises — with checkpoints to tick along the way. It explains MCP with a restaurant analogy (menu, waiter, kitchen, order, dish).
 
+> **New to the repo?** [`ARCHITECTURE.md`](ARCHITECTURE.md) has a diagram and a folder-by-folder guide to how everything fits together.
+
 ## The test report
 
 `npm run test:report` runs the tests and writes **`reports/mcp-report.html`**, one self-contained page you can open in any browser:
